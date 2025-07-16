@@ -1,0 +1,7 @@
+sdkconfig
+sdkconfig.*
+
+build/*
+.vscode/*
+.cache/*
+.devcontainer/*

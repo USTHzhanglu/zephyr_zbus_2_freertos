@@ -1,0 +1,23 @@
+# Always include .iram2.coredump section in the final linker script file,
+# even though it may be empty. The coredump component will ignore empty
+# sections when generating the ELF dump.
+
+[sections:zbus_channel_list]
+entries:
+    ._zbus_channel.static+
+
+[sections:zbus_observer_list]
+entries:
+    ._zbus_observer.static+
+
+[scheme:zbus_list_default]
+entries:
+    zbus_channel_list -> dram0_data
+    zbus_observer_list -> dram0_data
+
+[mapping:zbus]
+archive: *
+entries:
+    * (zbus_list_default);
+        zbus_channel_list -> dram0_data SURROUND(zbus_channel_list),
+        zbus_observer_list -> dram0_data SURROUND(zbus_observer_list)
